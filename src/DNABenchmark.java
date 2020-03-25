@@ -95,6 +95,7 @@ public class DNABenchmark {
 
 		File file = FileSelector.selectFile(); // ourChooser.getSelectedFile();
 		mySource = dnaFromScanner(new Scanner(file));
+		mySource = mySource + mySource + mySource;
 		System.out.printf("dna length = %,d\n", mySource.length());
 		System.out.println("cutting at enzyme " + ENZYME);
 		System.out.println("-----");
