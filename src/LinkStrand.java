@@ -112,6 +112,9 @@ public class LinkStrand implements IDnaStrand {
      */
     @Override
     public char charAt(int index) {
+        if(index < 0){
+            throw new StringIndexOutOfBoundsException("Out of Bounds");
+        }
         if(index < myIndex){
         myCurrent = myFirst;
         myIndex = 0;
