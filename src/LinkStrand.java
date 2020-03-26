@@ -80,22 +80,16 @@ public class LinkStrand implements IDnaStrand {
      */
     @Override
     public IDnaStrand reverse() {
-    Node iterator = myFirst;
-    Node f = iterator;
-    while(iterator != null){
-        StringBuilder c = new StringBuilder(iterator.info);
-        c.reverse();
-        String s1 = c.toString();
-        iterator.info = s1;
-        iterator = iterator.next;
+    StringBuilder r = new StringBuilder();
+    Node r1 = this.myFirst;
+    while(r1 != null){
+        StringBuilder copy = new StringBuilder(r1.info);
+        copy.reverse();
+        r.insert(0,copy.toString());
+        r1 = r1.next;
     }
-    LinkStrand n1 = new LinkStrand(f.info);
-    f=f.next;
-    while(f != null){
-        n1.myFirst = new Node(f.info, n1.myFirst);
-        f=f.next;
-    }
-        return n1;
+    LinkStrand L = new LinkStrand(r.toString());
+    return L;
     }
     /**
      *Getter for myAppends
@@ -113,7 +107,7 @@ public class LinkStrand implements IDnaStrand {
     @Override
     public char charAt(int index) {
         if(index < 0){
-            throw new StringIndexOutOfBoundsException("Out of Bounds");
+            throw new IndexOutOfBoundsException("Out of Bounds");
         }
         if(index < myIndex){
         myCurrent = myFirst;
