@@ -64,7 +64,7 @@ public class LinkStrand implements IDnaStrand {
     }
     /**
      Appends a new String to the pre-existing one
-     @param String dna to be added
+     @param dna to be added
      @return the same node
      */
     @Override
@@ -107,14 +107,11 @@ public class LinkStrand implements IDnaStrand {
     }
     /**
     *Gives the character at a given index
-     *@param int index is the index to be searched
+     *@param index is the index to be searched
      * @return a LinkStrand object
      */
     @Override
     public char charAt(int index) {
-        if(index <= 0 | index>mySize-1){
-            throw new IndexOutOfBoundsException("out of bounds");
-        }
         if(index < myIndex){
         myCurrent = myFirst;
         myIndex = 0;
