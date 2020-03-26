@@ -15,9 +15,7 @@ public class CodonProfiler {
 	public int[] getCodonProfile(IDnaStrand strand, String[] codons) {
 		HashMap<String,Integer> map = new HashMap<>();
 		int[] ret = new int[codons.length];
-				
-		for(int k=0; k < codons.length; k++) {
-			Iterator<Character> iter = strand.iterator();
+		Iterator<Character> iter = strand.iterator();
 			while (iter.hasNext()) {
 				char a = iter.next();
 				char b = 'z';           // not part of any real codon
@@ -28,11 +26,17 @@ public class CodonProfiler {
 				if (iter.hasNext()) {
 					c = iter.next();
 				}
-				String cod = ""+a+b+c;
-				if (cod.equals(codons[k])) {
-					ret[k] += 1;
-				}
+				String cod = "" + a + b + c;
+				map.putIfAbsent(cod, 0);
+				map.put(cod, map.get(cod) + 1);
 			}
+		for(int i =0; i<codons.length; i++){
+			Integer f = map.get(codons[i]);
+			int e = 0;
+			if(f != null){
+				e = f.intValue();
+			}
+			ret[i] = e;
 		}
 		return ret;
 	}

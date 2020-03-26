@@ -3,7 +3,11 @@ public class LinkStrand implements IDnaStrand {
     private class Node {
         String info;
         Node next;
-
+        /**
+         Constructor that creates a LinkStrand based on
+         * @param s is a String
+         * @param n is the node it points toward
+         */
         public Node(String s, Node n) {
             info = s;
             next = n;
@@ -20,32 +24,49 @@ public class LinkStrand implements IDnaStrand {
     public LinkStrand(String s) {
         initialize(s);
     }
-
+    /**
+     Constructor that creates a LinkStrand with no parameters
+     */
     public LinkStrand() {
         this("");
     }
 
+    /**
+     Initializes instance variables
+     * @param source is a String that gives information for the LinkStrand
+     */
     @Override
     public void initialize(String source) {
         myFirst = new Node(source, null);
         myLast = myFirst;
-        mySize = source.length()+1;
+        mySize = source.length();
         myAppends = 0;
         myCurrent = myFirst;
         myIndex = 0;
         myLocalIndex = 0;
     }
-
+    /**
+     Copies the given String to a new LinkStrand
+     * @param source is a String that gives information for the LinkStrand
+     * @return a LinkStrand object
+     */
     @Override
     public IDnaStrand getInstance(String source) {
         return new LinkStrand(source);
     }
-
+    /**
+     Getter for mySize
+     * @return the mySize int
+     */
     @Override
     public long size() {
         return mySize;
     }
-
+    /**
+     Appends a new String to the pre-existing one
+     @param String dna to be added
+     @return the same node
+     */
     @Override
     public IDnaStrand append(String dna) {
         myLast.next = new Node (dna,null);
@@ -54,7 +75,9 @@ public class LinkStrand implements IDnaStrand {
         myAppends++;
         return this;
     }
-
+    /**
+     *Reverses order of characters
+     */
     @Override
     public IDnaStrand reverse() {
     Node iterator = myFirst;
@@ -74,12 +97,19 @@ public class LinkStrand implements IDnaStrand {
     }
         return n1;
     }
-
+    /**
+     *Getter for myAppends
+     * @return int myAppends
+     */
     @Override
     public int getAppendCount() {
     return myAppends;
     }
-
+    /**
+    *Gives the character at a given index
+     *@param int index is the index to be searched
+     * @return a LinkStrand object
+     */
     @Override
     public char charAt(int index) {
         if(index < myIndex){
@@ -97,7 +127,10 @@ public class LinkStrand implements IDnaStrand {
         }
         return myCurrent.info.charAt(myLocalIndex);
         }
-
+    /**
+    *Turns node to a String
+     * @return String given from node
+     */
     @Override
     public String toString() {
         Node temp = myFirst;
