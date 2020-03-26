@@ -10,9 +10,9 @@ public class LinkStrand implements IDnaStrand {
         }
     }
 
-    private Node myFirst, myLast;
+    private Node myFirst, myLast, myCurrent;
     private long mySize;
-    private int myAppends;
+    private int myAppends, myIndex, myLocalIndex;
 
     public LinkStrand(String s) {
         initialize(s);
@@ -28,6 +28,9 @@ public class LinkStrand implements IDnaStrand {
         myLast = myFirst;
         mySize = source.length();
         myAppends = 0;
+        myCurrent = myFirst;
+        myIndex = 0;
+        myLocalIndex = 0;
     }
 
     @Override
@@ -51,26 +54,46 @@ public class LinkStrand implements IDnaStrand {
 
     @Override
     public IDnaStrand reverse() {
-        StringBuilder reversed = new StringBuilder(myLast.info);
-        LinkStrand copy = new LinkStrand(reversed.reverse().toString());
-
-
-
-
-        copy.reverse()
-
-        return null;
+    Node iterator = myFirst;
+    Node f = iterator;
+    while(iterator != null){
+        StringBuilder c = new StringBuilder(iterator.info);
+        c.reverse();
+        String s1 = c.toString();
+        iterator.info = s1;
+        iterator = iterator.next;
+    }
+    LinkStrand n1 = new LinkStrand(f.info);
+    f=f.next;
+    while(f != null){
+        n1.myFirst = new Node(f.info, n1.myFirst);
+        f=f.next;
+    }
+        return n1;
     }
 
     @Override
     public int getAppendCount() {
-        return 0;
+    return myAppends;
     }
 
     @Override
     public char charAt(int index) {
-        return 0;
-    }
+        if(index < myIndex){
+        myCurrent = myFirst;
+        myIndex = 0;
+        myLocalIndex = 0;
+        }
+        while(myIndex != index){
+            myLocalIndex++;
+            myIndex++;
+            if(myLocalIndex >= myCurrent.info.length()){
+                myLocalIndex = 0;
+                myCurrent = myCurrent.next;
+            }
+        }
+        return myCurrent.info.charAt(myLocalIndex);
+        }
 
     @Override
     public String toString() {
@@ -84,5 +107,5 @@ public class LinkStrand implements IDnaStrand {
     }
 
 
-
 }
+
