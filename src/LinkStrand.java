@@ -13,7 +13,10 @@ public class LinkStrand implements IDnaStrand {
     private Node myFirst, myLast, myCurrent;
     private long mySize;
     private int myAppends, myIndex, myLocalIndex;
-
+    /**
+     Constructor that creates a LinkStrand based on
+     * @param s is a String
+     */
     public LinkStrand(String s) {
         initialize(s);
     }
@@ -26,7 +29,7 @@ public class LinkStrand implements IDnaStrand {
     public void initialize(String source) {
         myFirst = new Node(source, null);
         myLast = myFirst;
-        mySize = source.length();
+        mySize = source.length()+1;
         myAppends = 0;
         myCurrent = myFirst;
         myIndex = 0;
